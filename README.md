@@ -179,14 +179,22 @@ Scrova is optimized for High Performance:
 ✔ Optimized for Large-Scale Apps  
 
 ## 📌 Comparison: Redux Toolkit vs Zustand vs Scrova
-| Feature                     | Redux Toolkit | Zustand | Scrova 🚀 |
-|-----------------------------|---------------|---------|-----------|
-| Global State?               | ✅ Yes        | ✅ Yes  | ✅ Yes    |
-| Local State?                | ❌ No         | ✅ Yes  | ✅ Yes    |
-| Slice-Based Structure?      | ✅ Yes        | ❌ No   | ✅ Yes (Auto) |
-| Boilerplate Required?       | ❌ Too Much   | ✅ Minimal | ✅ Super Minimal |
-| Reducer Functions Auto Generated? | ❌ No | ❌ No   | ✅ Yes    |
-| Middleware Support?         | ✅ Yes        | ✅ Yes  | ✅ Yes    |
+| Feature                         | Redux Toolkit | Zustand | Scrova 🚀       |
+|---------------------------------|--------------|---------|-----------------|
+| Global State?                   | ✅ Yes       | ✅ Yes  | ✅ Yes          |
+| Local State?                    | ❌ No        | ✅ Yes  | ✅ Yes          |
+| Slice-Based Structure?          | ✅ Yes       | ❌ No   | ✅ Yes (Auto)   |
+| Boilerplate Required?           | ❌ Too Much  | ✅ Minimal | ✅ Super Minimal |
+| Reducer Functions Auto Generated? | ❌ No     | ❌ No   | ✅ Yes          |
+| Middleware Support?             | ✅ Yes       | ✅ Yes  | ✅ Yes          |
+| Async Handling?                 | ✅ Yes (Thunk) | ❌ No   | ✅ Yes (Built-in) |
+| Works Outside React?            | ❌ No        | ❌ No   | ✅ Yes          |
+| Unnecessary Renders Removed?    | ❌ No        | ❌ No   | ✅ Yes          |
+| Reactivity Speed                | 🚀 Fast      | ⚡ Medium | ⚡⚡ Super Fast  |
+| Memory Usage                    | 🔴 High      | 🟡 Medium | 🟢 Low          |
+| Instant State Updates?          | ❌ No        | ✅ Yes  | ✅ Yes (Super Fast) |
+| Enterprise-Level Performance?   | ❌ No        | ❌ No   | ✅ Yes          |
+
 
 ## 📌 Final Thoughts
 🔥 Scrova is the best combo of Zustand + Redux Toolkit!
