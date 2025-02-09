@@ -1,0 +1,54 @@
+const globalStore = {};
+const reducers = {};
+const subscribers = {};
+
+export function configureScrova(config) {
+  Object.keys(config).forEach((key) => {
+    globalStore[key] = config[key].state;
+    reducers[key] = {};
+    subscribers[key] = new Set();
+
+    Object.keys(config[key].reducers).forEach((funcName) => {
+      reducers[key][funcName] = (payload) => {
+        globalStore[key] = config[key].reducers[funcName](globalStore[key], payload);
+        notify(key);
+      };
+    });
+  });
+
+  return {
+    useScrova,
+    actions: Object.keys(reducers).reduce((acc, key) => {
+      acc[key] = Object.keys(reducers[key]).reduce((acc2, func) => {
+        acc2[func] = (payload) => reducers[key][func](payload);
+        return acc2;
+      }, {});
+      return acc;
+    }, {}),
+  };
+}
+
+function notify(key) {
+  if (subscribers[key]) {
+    subscribers[key].forEach((callback) => callback());
+  }
+}
+
+export function useScrova(key) {
+  const [state, setState] = useState(() => globalStore[key]);
+
+  useEffect(() => {
+    const callback = () => setState(globalStore[key]);
+    subscribers[key].add(callback);
+    return () => subscribers[key].delete(callback);
+  }, [key]);
+
+  return [
+    state,
+    (action) =>
+      typeof action === "function"
+        ? setState(action(state))
+        : setState(action),
+    reducers[key] || {},
+  ];
+}

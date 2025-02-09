@@ -1,0 +1,16 @@
+{
+  "name": "scrova",
+  "version": "1.0.0",
+  "description": "Next-Gen State Management for React (Fast, Simple, Zero Boilerplate)",
+  "main": "src/index.js",
+  "keywords": ["react", "state-management", "redux-alternative", "zustand"],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/scrova.git"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0"
+  }
+}
