@@ -1,1 +1,1 @@
-export { configureScrova, useScrova } from "./store";
+export { configureScrova, useScrova } from "./scrova";
