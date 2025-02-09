@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 const globalStore = {};
 const reducers = {};
 const subscribers = {};
@@ -10,22 +12,22 @@ export function configureScrova(config) {
 
     Object.keys(config[key].reducers).forEach((funcName) => {
       reducers[key][funcName] = (payload) => {
-        globalStore[key] = config[key].reducers[funcName](globalStore[key], payload);
+        const newState = config[key].reducers[funcName](globalStore[key], payload);
+        globalStore[key] = { ...globalStore[key], ...newState };
         notify(key);
       };
     });
   });
 
-  return {
-    useScrova,
-    actions: Object.keys(reducers).reduce((acc, key) => {
-      acc[key] = Object.keys(reducers[key]).reduce((acc2, func) => {
-        acc2[func] = (payload) => reducers[key][func](payload);
-        return acc2;
-      }, {});
-      return acc;
-    }, {}),
-  };
+  const actions = Object.keys(reducers).reduce((acc, key) => {
+    acc[key] = Object.keys(reducers[key] || {}).reduce((acc2, func) => {
+      acc2[func] = (payload) => reducers[key][func](payload);
+      return acc2;
+    }, {});
+    return acc;
+  }, {});
+
+  return { useScrova, actions };
 }
 
 function notify(key) {
@@ -35,7 +37,11 @@ function notify(key) {
 }
 
 export function useScrova(key) {
-  const [state, setState] = useState(() => globalStore[key]);
+  if (!reducers[key]) {
+    throw new Error(`useScrova: "${key}" state does not exist.`);
+  }
+
+  const [state, setState] = useState(() => globalStore[key] ?? null);
 
   useEffect(() => {
     const callback = () => setState(globalStore[key]);
@@ -47,8 +53,8 @@ export function useScrova(key) {
     state,
     (action) =>
       typeof action === "function"
-        ? setState(action(state))
-        : setState(action),
+        ? setState((prev) => action(prev))
+        : setState((prev) => ({ ...prev, ...action })),
     reducers[key] || {},
   ];
 }
