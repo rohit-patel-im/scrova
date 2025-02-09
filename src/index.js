@@ -1,1 +1,1 @@
-export { configureScrova, useScrova } from "./scrova";
+export { configureScrova, useScrova, getScrovaState, setScrovaState } from "./scrova";
