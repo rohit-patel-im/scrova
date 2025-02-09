@@ -36,7 +36,14 @@ function notify(key) {
   }
 }
 
-export function useScrova(key) {
+export function useScrova(key, initialState = null) {
+  // ✅ If key is null, use local state mode
+  if (!key) {
+    const [localState, setLocalState] = useState(initialState);
+    return [localState, setLocalState];
+  }
+
+  // ✅ If key exists, use global store
   if (!reducers[key]) {
     throw new Error(`useScrova: "${key}" state does not exist.`);
   }
@@ -58,3 +65,4 @@ export function useScrova(key) {
     reducers[key] || {},
   ];
 }
+
