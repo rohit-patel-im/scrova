@@ -1,6 +1,6 @@
 {
   "name": "scrova",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Next-Gen State Management for React (Fast, Simple, Zero Boilerplate)",
   "main": "src/index.js",
   "keywords": ["react", "state-management", "redux-alternative", "zustand"],
